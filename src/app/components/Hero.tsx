@@ -59,7 +59,7 @@ export default function Hero() {
 						transition={{ delay: 0.5 }}
 					>
 						<motion.a
-							href="https://github.com"
+							href={process.env.NEXT_PUBLIC_GITHUB}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-2xl text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
@@ -69,7 +69,7 @@ export default function Hero() {
 							<FaGithub />
 						</motion.a>
 						<motion.a
-							href="https://linkedin.com"
+							href={process.env.NEXT_PUBLIC_LINKED_IN}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-2xl text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
@@ -79,7 +79,7 @@ export default function Hero() {
 							<FaLinkedin />
 						</motion.a>
 						<motion.a
-							href="https://leetcode.com"
+							href={process.env.NEXT_PUBLIC_LEETCODE}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-2xl text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
@@ -89,7 +89,7 @@ export default function Hero() {
 							<SiLeetcode />
 						</motion.a>
 						<motion.a
-							href="https://www.instagram.com"
+							href={process.env.NEXT_PUBLIC_INSTAGRAM}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-2xl text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"

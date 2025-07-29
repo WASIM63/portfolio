@@ -27,7 +27,7 @@ export default function Footer() {
 
 					<div className="flex space-x-6">
 						<a
-							href="https://github.com/WASIM63"
+							href={process.env.NEXT_PUBLIC_GITHUB}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-secondary hover:text-primary transition-colors"
@@ -35,7 +35,7 @@ export default function Footer() {
 							<FaGithub className="h-6 w-6" />
 						</a>
 						<a
-							href="https://linkedin.com/in/wasim-akram-mallick-542096282"
+							href={process.env.NEXT_PUBLIC_LINKED_IN}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-secondary hover:text-primary transition-colors"
@@ -43,7 +43,7 @@ export default function Footer() {
 							<FaLinkedin className="h-6 w-6" />
 						</a>
 						<a
-							href="https://leetcode.com/u/WASIM63/"
+							href={process.env.NEXT_PUBLIC_LEETCODE}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-secondary hover:text-primary transition-colors"
@@ -51,7 +51,7 @@ export default function Footer() {
 							<SiLeetcode className="h-6 w-6" />
 						</a>
 						<a
-							href="https://www.instagram.com/wasimakrammalli?igsh=MTRld3J6Z25iZDB5dw=="
+							href={process.env.NEXT_PUBLIC_INSTAGRAM}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-secondary hover:text-primary transition-colors"

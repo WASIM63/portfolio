@@ -46,7 +46,7 @@ export interface Education{
 export interface Gallery{
   title:string,
   description?:string[],
-  date?:string,
+  date?:Date,
   location?:string,
   externalLink?:string[],
   photos:{
