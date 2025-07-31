@@ -28,6 +28,7 @@ const SkillCard = ({skill}:{skill:Skill}) => {
 							alt="image"
 							className="h-15 w-auto mb-2"
 							height={15}
+							width={15}
 						/>
 						<h4 className="text-center text-sm">{topic.name}</h4>
 					</li>

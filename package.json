@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "refresh": "rmdir /s /q .next && npm run dev",
-    "email":"email dev"
+    "email": "email dev"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -16,6 +16,7 @@
     "framer-motion": "^12.9.7",
     "masonry-layout": "^4.2.2",
     "next": "15.3.1",
+    "nodemailer": "^7.0.5",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-icons": "^5.5.0",
@@ -27,6 +28,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-responsive-masonry": "^2.6.0",
