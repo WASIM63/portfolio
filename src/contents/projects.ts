@@ -80,7 +80,7 @@ export const projects: Project[] = [
 			"Socket.IO",
 		],
 		githubLink: "https://github.com/WASIM63/Multiplayer-Bingo-Game",
-		demoLink: "https://demo.com",
+		demoLink: "https://multiplayer-bingo-game.vercel.app/",
 		image: "/projects/bingo.png",
 		domain: "Full Stack",
 	},
