@@ -81,7 +81,7 @@ export const projects: Project[] = [
 		],
 		githubLink: "https://github.com/WASIM63/Multiplayer-Bingo-Game",
 		demoLink: "https://demo.com",
-		image: "/projects/",
+		image: "/projects/bingo.png",
 		domain: "Full Stack",
 	},
 	{
