@@ -10,6 +10,13 @@ export const educations: Education[] = [
 			"Graduated with honors. Focused on software engineering and web development.",
 	},
 	{
+		degree: "B.Tech in Computer Science & Engineering",
+		institution: "Swami Vivekananda University",
+		start: 2022,
+		end: 2026,
+		description: "CGPA: 9.22",
+	},
+	{
 		degree: "Higher Secondary",
 		institution: "Boruna Satsanga High School(H.S.)",
 		start: 2020,

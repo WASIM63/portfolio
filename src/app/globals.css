@@ -1,82 +1,124 @@
 @import "tailwindcss";
 
-/* --color-primary: #007AFF;
---color-secondary: #6B7280;
---color-dark: #1F2937;
---color-light: #F9FAFB;
---color-text: #000000;
---color-bg: #ffffff; */
-
 @theme {
-  --color-primary: #00ff08;
-  --color-secondary: #6B7280;
-  --color-dark: #222222;
-  --color-light: #F9FAFB;
-  --color-text: #000000;
-  --color-bg: #ffffff;
-
-  --font-sans: 'Inter', sans-serif;
-
-  --animation-fade-in: fadeIn 0.5s ease-in-out;
-  --animation-slide-up: slideUp 0.5s ease-in-out;
+  --color-primary: #4f46e5;
+  --color-secondary: #667085;
+  --color-dark: #101828;
+  --color-light: #f8fafc;
+  --color-text: #101828;
+  --color-bg: #f8fafc;
 }
 
-:root{
-  --color-new:#222222;
+:root {
+  --surface: #ffffff;
+  --surface-muted: #f1f5f9;
+  --border: #e2e8f0;
+  --muted: #667085;
+  --foreground: #101828;
+  --background: #f8fafc;
+  --primary: #4f46e5;
+  --accent: #06b6d4;
+  --radius: 1.25rem;
 }
+
+html.dark {
+  --surface: #151b2b;
+  --surface-muted: #1d2638;
+  --border: #293548;
+  --muted: #98a2b3;
+  --foreground: #f8fafc;
+  --background: #0b1120;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
-a {
-  transition: all 0.2s ease;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+a, button, input, textarea {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 38%, transparent);
+  outline-offset: 3px;
 }
 
 @layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-2 border-secondary shadow-2xl shadow-primary/50 rounded-4xl;
-  }
-  
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200 ;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold;
   }
-  
+
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary/90;
+    @apply bg-primary text-white shadow-lg shadow-primary/20 hover:-translate-y-0.5 hover:bg-primary/90;
   }
-  
+
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary/90;
+    @apply border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:-translate-y-0.5 hover:border-primary hover:text-primary;
   }
-  
+
   .section-title {
-    @apply text-3xl font-bold mb-8 text-center;
-  }
-} 
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    @apply mb-4 text-3xl font-bold tracking-tight sm:text-4xl;
   }
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
+.page-shell {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section-shell {
+  padding-block: 5rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding-inline: 2.5rem;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .section-shell {
+    padding-block: 7rem;
   }
 }
 
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-inline: 3rem;
+  }
+}
 
-  .no-scrollbar {
-    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.eyebrow {
+  @apply mb-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .no-scrollbar:hover {
-    @apply [scrollbar-width:thin] [&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-10 [&::-webkit-scrollbar-track]:bg-primary [&::-webkit-scrollbar-thumb]:bg-secondary [&::-webkit-scrollbar-thumb]:rounded;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+}

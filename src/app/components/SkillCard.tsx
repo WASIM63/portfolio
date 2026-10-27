@@ -23,13 +23,15 @@ const SkillCard = ({skill}:{skill:Skill}) => {
 						key={index}
 						className="flex flex-col items-center mb-6 min-w-[80px] max-w-[120px]"
 					>
-						<Image
-							src={topic.image}
-							alt="image"
-							className="h-15 w-auto mb-2"
-							height={15}
-							width={15}
-						/>
+						{topic.image && (
+							<Image
+								src={topic.image}
+								alt=""
+								className="mb-2 h-15 w-auto"
+								height={15}
+								width={15}
+							/>
+						)}
 						<h4 className="text-center text-sm">{topic.name}</h4>
 					</li>
 				))}

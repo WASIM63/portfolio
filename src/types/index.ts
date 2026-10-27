@@ -1,11 +1,14 @@
 export interface Project {
+  id: string;
   title: string;
+  category: string;
   description: string;
+  features: string[];
   technologies: string[];
-  githubLink: string;
-  demoLink: string;
-  image: string;
-  domain?:string;
+  image: string | null;
+  githubUrl: string | null;
+  liveUrl: string | null;
+  featured?: boolean;
 }
 
 export interface Blog {
@@ -21,11 +24,14 @@ export interface Experience{
   start: string;
   end: string;
   role: string;
+  location?: string;
+  overview: string;
+  technologies?: string[];
   description:string[];
 }
 
 interface Topics{
-  image:string;
+  image?:string;
   name:string;
 }
 
@@ -45,6 +51,8 @@ export interface Education{
 
 export interface Gallery{
   title:string,
+  category?: string,
+  highlight?: string,
   description?:string[],
   date?:Date,
   location?:string,
@@ -53,4 +61,9 @@ export interface Gallery{
       img:string,
       description?:string,
     }[]
+  videos?: {
+    src: string,
+    poster?: string,
+    title?: string,
+  }[]
 }

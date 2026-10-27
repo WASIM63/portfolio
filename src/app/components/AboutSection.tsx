@@ -1,152 +1,68 @@
 "use client";
 
 import Image from "next/image";
-// import { FaLaptopCode, FaGraduationCap } from 'react-icons/fa'
 import { motion } from "framer-motion";
-import {
-	fadeInUp,
-	fadeInDown,
-	fadeIn,
-	staggerContainer,
-	cardHoverSmall,
-	scaleIn,
-} from "@/utils/animations";
-
-import ExperienceCard from "../components/ExperienceCard";
-import { experiences } from "@/contents/experience";
 import { skills } from "@/contents/skills";
-import SkillCard from "../components/SkillCard";
-import EducationCard from "../components/EducationCard";
+import { experiences } from "@/contents/experience";
 import { educations } from "@/contents/education";
+import { exploringGroups } from "@/contents/exploring";
+import SkillIcon from "./SkillIcon";
 
 export default function AboutSection() {
-	const hasExperience:boolean=experiences.length>0
-	return (
-		<div className="container max-w-7xl mx-auto py-12">
-			<div className="flex md:flex-row flex-col justify-around">
-				{/* profile image section */}
-				<motion.div
-					className="flex justify-center items-center mb-4"
-					{...scaleIn}
-					transition={{ delay: 0.2 }}
-				>
-					<Image
-						src="/profilePic.jpg"
-						alt="Profile"
-						width={100}
-						height={100}
-						className="rounded-full mb-4 w-50 h-50 object-cover ring-2 ring-primary"
-					/>
-				</motion.div>
+  return (
+    <section className="page-shell section-shell">
+      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <p className="eyebrow">About me</p>
+          <h1 className="section-title text-4xl sm:text-5xl">Backend-focused. Curious about what&apos;s next.</h1>
+          <Image src="/profilePic.jpg" alt="Wasim Akram Mallick" width={500} height={560} className="mt-8 aspect-[4/5] max-w-sm rounded-[1.5rem] object-cover" />
+        </div>
+        <div>
+          <p className="text-lg leading-8 text-[var(--muted)]">I am a backend-focused software engineer with hands-on experience building REST APIs, database-driven applications, authentication systems, background jobs, real-time communication features, and third-party integrations.</p>
+          <p className="mt-5 text-lg leading-8 text-[var(--muted)]">I work primarily with NestJS, Node.js, TypeScript, relational and NoSQL databases, Redis, and deployment tools. I also have frontend and mobile development experience, which helps me understand complete application workflows.</p>
+          <p className="mt-5 text-lg leading-8 text-[var(--muted)]">I am currently exploring microservices architecture and the tools used to build, communicate between, deploy, and monitor distributed backend systems.</p>
+        </div>
+      </div>
 
-				{/* about section */}
-				<div>
-					<motion.h1
-						className="text-4xl font-bold mb-8 text-center"
-						{...fadeInDown}
-					>
-						About Me
-					</motion.h1>
+      <div className="mt-24">
+        <p className="eyebrow">Technical skills</p>
+        <div className="grid gap-5 md:grid-cols-2">
+          {skills.map((skill) => (
+            <div key={skill.category} className="surface-card p-6">
+              <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">{skill.category}</h2>
+              <div className="flex flex-wrap gap-2">{skill.topics.map((topic) => <span key={topic.name} className="inline-flex items-center gap-2 rounded-md bg-[var(--surface-muted)] px-2.5 py-1.5 text-sm text-[var(--muted)]"><SkillIcon name={topic.name} />{topic.name}</span>)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-					{/* Bio Section */}
-					<motion.section className="mb-16" {...fadeInUp}>
-						<p className="text-lg text-secondary max-w-3xl mx-auto text-center">
-							I am a Full Stack Web Developer skilled in building
-							scalable, responsive, and user-friendly applications
-							using the MERN stack technologies. I am a techie
-							guy, love to experiment, build and manage technical
-							softwere projects. I belong from those boy who grew
-							up with opening, breaking electronic devices to see
-							what is inside it and how it works. I belong from
-							those boy who grew up with watching sci-fi hollywood
-							movies and get inspiretions. I love science, always
-							try to find logics behind anything and love to
-							explain to others. Love to draw, travel.
-						</p>
-					</motion.section>
-				</div>
-			</div>
+      <div className="mt-24">
+        <div className="mb-8 flex items-end justify-between gap-4"><div><p className="eyebrow">Professional experience</p><h2 className="section-title">Where I&apos;ve been building.</h2></div></div>
+        <div className="relative space-y-6 before:absolute before:bottom-4 before:left-[7px] before:top-4 before:w-px before:bg-[var(--border)]">
+          {experiences.map((experience) => (
+            <article key={`${experience.company}-${experience.role}`} className="relative pl-8">
+              <span className="absolute left-0 top-2 h-4 w-4 rounded-full border-4 border-[var(--background)] bg-primary" />
+              <div className="surface-card p-6">
+                <div className="flex flex-col justify-between gap-2 sm:flex-row"><div><h3 className="text-xl font-semibold">{experience.role}</h3><p className="mt-1 text-primary">{experience.company}</p></div><p className="text-sm text-[var(--muted)]">{experience.start} — {experience.end}</p></div>
+                {experience.location && <p className="mt-3 text-sm text-[var(--muted)]">{experience.location}</p>}
+                <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{experience.overview}</p>
+                {experience.description.length > 0 && <ul className="mt-4 grid gap-2 text-sm leading-6 text-[var(--muted)] sm:grid-cols-2">{experience.description.map((item) => <li key={item}>• {item}</li>)}</ul>}
+                {experience.technologies && <div className="mt-5 flex flex-wrap gap-2">{experience.technologies.map((technology) => <span key={technology} className="rounded-md bg-primary/10 px-2.5 py-1 text-xs text-primary">{technology}</span>)}</div>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
 
-			<div className="flex md:flex-row flex-col justify-between">
-				{/* Experience Section */}
-				{hasExperience && (
-					<motion.section
-						className=" md:min-h-200 mb-16 md:min-w-[30%]"
-						{...fadeIn}
-						transition={{ delay: 0.4 }}
-					>
-						<motion.h2 className="section-title" {...fadeInUp}>
-							Experience
-						</motion.h2>
-						<motion.div
-							className={`h-screen max-w-3xl mx-auto space-y-8 overflow-y-scroll overflow-x-hidden no-scrollbar`}
-							variants={staggerContainer}
-							initial="initial"
-							animate="animate"
-						>
-							{experiences.map((experience, index) => (
-								<ExperienceCard
-									experience={experience}
-									key={index}
-								/>
-							))}
-						</motion.div>
-					</motion.section>
-				)}
+      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-24">
+        <div className="mb-8"><p className="eyebrow">Currently exploring · Learning</p><h2 className="section-title">Exploring Microservices &amp; Distributed Systems</h2><p className="max-w-2xl text-[var(--muted)]">Expanding my backend engineering knowledge by learning how to design, communicate between, deploy, and observe independently deployable services.</p></div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{exploringGroups.map((group) => <div key={group.title} className="surface-card p-6"><h3 className="font-semibold">{group.title}</h3><div className="mt-4 flex flex-wrap gap-2">{group.topics.map((topic) => <span key={topic} className="rounded-md border border-dashed border-[var(--border)] px-2.5 py-1.5 text-sm text-[var(--muted)]">{topic}</span>)}</div></div>)}</div>
+      </motion.div>
 
-				{/* Divider⭐ */}
-				{hasExperience && (
-					<div
-						className={`md:h-screen relative top-[60] pb-0 md:w-0.5 h-0 w-0 bg-gray-300 m-10 mt-0`}
-					></div>
-				)}
-
-				{/* Skills Section */}
-				<motion.section
-					className={`mb-16 md:min-h-200 ${
-						hasExperience ? "md:w-[50%]" : "md:w-full"
-					}`}
-					{...fadeIn}
-					transition={{ delay: 0.2 }}
-				>
-					<motion.h2 className="section-title" {...fadeInUp}>
-						Skills
-					</motion.h2>
-					<motion.div
-						className="h-screen overflow-y-auto overflow-hidden no-scrollbar"
-						variants={staggerContainer}
-						initial="initial"
-						animate="animate"
-					>
-						{skills.map((skill, index) => (
-							<SkillCard key={index} skill={skill} />
-						))}
-					</motion.div>
-				</motion.section>
-			</div>
-
-			{/* Education Section */}
-			<motion.section {...fadeIn} transition={{ delay: 0.6 }}>
-				<motion.h2 className="section-title" {...fadeInUp}>
-					Education
-				</motion.h2>
-				<motion.div
-					className="max-w-3xl mx-auto"
-					variants={staggerContainer}
-					initial="initial"
-					animate="animate"
-				>
-					<motion.div
-						className="bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md space-y-8 h-[300px] overflow-auto no-scrollbar"
-						variants={fadeInUp}
-						{...cardHoverSmall}
-					>
-						{educations.map((education, index) => (
-							<EducationCard key={index} education={education} />
-						))}
-					</motion.div>
-				</motion.div>
-			</motion.section>
-		</div>
-	);
+      <div className="mt-24 grid gap-6 md:grid-cols-2">
+        <div><p className="eyebrow">Education</p><div className="space-y-4">{educations.map((education, index) => <div key={`${education.institution}-${education.degree}-${index}`} className="surface-card p-6"><p className="text-sm text-[var(--muted)]">{education.start} — {education.end}</p><h2 className="mt-2 text-xl font-semibold">{education.degree}</h2><p className="mt-1 text-primary">{education.institution}</p><p className="mt-4 text-sm text-[var(--muted)]">{education.description}{education.marks ? ` · ${education.marks}` : ""}</p></div>)}</div></div>
+        <div><p className="eyebrow">Achievements</p><div className="surface-card p-6 text-sm leading-7 text-[var(--muted)]"><p>Third place in Byte Blitz 2.0, Seacom Engineering College, 2024.</p><p className="mt-3">Solved 430+ LeetCode problems.</p></div></div>
+      </div>
+    </section>
+  );
 }

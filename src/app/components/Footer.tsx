@@ -9,23 +9,22 @@ import { SiLeetcode } from "react-icons/si";
 
 export default function Footer() {
   return (
-		<footer className="bg-white dark:bg-dark border-t border-gray-200 dark:border-gray-800">
-			<div className="container max-w-7xl mx-auto px-4 py-8">
+		<footer className="border-t border-[var(--border)]">
+			<div className="page-shell py-8">
 				<div className="flex flex-col md:flex-row justify-between items-center">
 					<div className="mb-4 md:mb-0">
 						<Link
 							href="/"
-							className="text-2xl font-bold text-primary"
+							className="text-lg font-bold tracking-tight"
 						>
-							PORTFOLIO
+							<span className="text-primary">WAM</span>.
 						</Link>
 						<p className="text-sm text-secondary mt-2">
-							© {new Date().getFullYear()} Portfolio. All rights
-							reserved.
+							© {new Date().getFullYear()} Wasim Akram Mallick.
 						</p>
 					</div>
 
-					<div className="flex space-x-6">
+					<div className="flex gap-5">
 						<a
 							href={process.env.NEXT_PUBLIC_GITHUB}
 							target="_blank"

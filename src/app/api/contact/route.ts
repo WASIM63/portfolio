@@ -11,21 +11,37 @@ interface ContactRequestBody {
 }
 
 export async function POST(request: Request) {
-	const senderDetails: ContactRequestBody =
-		(await request.json()) as ContactRequestBody;
-
 	try {
-		const { data, error } = await resend.emails.send({
+		const body = (await request.json()) as Partial<ContactRequestBody>;
+		const name = typeof body.name === "string" ? body.name.trim() : "";
+		const email = typeof body.email === "string" ? body.email.trim() : "";
+		const message = typeof body.message === "string" ? body.message.trim() : "";
+
+		if (!name || !email || !message) {
+			return NextResponse.json(
+				{ message: "Name, email, and message are required." },
+				{ status: 400 }
+			);
+		}
+
+		if (!process.env.NEXT_PUBLIC_RESEND_API_KEY || !process.env.NEXT_PUBLIC_EMAIL_ID_2) {
+			return NextResponse.json(
+				{ message: "Contact service is not configured." },
+				{ status: 503 }
+			);
+		}
+
+		const { error } = await resend.emails.send({
 			from: "Acme <onboarding@resend.dev>",
-			to: process.env.NEXT_PUBLIC_EMAIL_ID_2 ?? "",
+			to: process.env.NEXT_PUBLIC_EMAIL_ID_2,
 			subject: "Contact request from Portfolio viewrs",
 			react: EmailTemplate({
-				name: senderDetails.name,
-				email: senderDetails.email,
-				msg: senderDetails.message,
+				name,
+				email,
+				msg: message,
 			}),
 		});
-		console.log(data, error);
+
 		if (error) {
 			return NextResponse.json({ error }, { status: 500 });
 		}

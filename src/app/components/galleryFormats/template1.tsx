@@ -1,99 +1,54 @@
-import React from "react";
+import { FaCalendar, FaMapMarkerAlt, FaPlayCircle } from "react-icons/fa";
 import { Gallery } from "@/types";
 import Image from "next/image";
 
-const template1 = ({ moment }: { moment?: Gallery }) => {
-	// Handle case where moment is undefined
-	if (!moment) {
-		return (
-			<div className="w-full max-w-7xl mx-auto p-2 sm:p-4">
-				<div className="min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-150px)] w-full border-2 border-secondary rounded-2xl flex items-center justify-center">
-					<p className="text-gray-500">No moment data available</p>
-				</div>
-			</div>
-		);
-	}
-	return (
-		<div className="w-full max-w-7xl mx-auto p-2 sm:p-4 ">
-			<div className="container min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-150px)] w-full border-2 border-secondary rounded-2xl flex flex-col lg:flex-row gap-4 p-3 sm:p-4 md:p-6">
-				{/* Details Section */}
-				<div className="w-full lg:w-[40%] min-h-[300px] lg:min-h-full border-2 border-secondary rounded-2xl p-4 flex flex-col ">
-					{/* Title and Date - Fixed at top */}
-					<div className="flex-shrink-0 space-y-3 sm:space-y-4">
-						<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-							{moment.title || "Moment Title"}
-						</h1>
-						<p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-							{moment.date?.toDateString()} •{" "}
-							{moment.location || "Location"}
-						</p>
-					</div>
+const GalleryEntry = ({ moment, index }: { moment?: Gallery; index: number }) => {
+  if (!moment) return null;
 
-					{/* Description - Takes remaining space if exists */}
-					{moment.description && (
-						<div className="flex-1 mt-4 lg:mt-6 min-h-0 flex flex-col">
-							<div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-3 flex-1 min-h-0 flex flex-col">
-								<h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 flex-shrink-0">
-									Description
-								</h3>
-								<div className="flex-1 overflow-y-auto no-scrollbar">
-									<p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-										{moment.description
-											? moment.description
-											: ""}
-									</p>
-								</div>
-							</div>
-						</div>
-					)}
-				</div>
+  return (
+    <article className="surface-card overflow-hidden">
+      <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="flex flex-col justify-between bg-[var(--surface-muted)] p-6 sm:p-8">
+          <div>
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {moment.category ?? "Achievement"}
+              </span>
+              <span className="text-sm font-medium text-[var(--muted)]">0{index + 1}</span>
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{moment.title || "Achievement"}</h2>
+            {moment.highlight && <p className="mt-4 text-lg font-medium leading-7 text-primary">{moment.highlight}</p>}
+            <div className="mt-5 space-y-3 text-sm text-[var(--muted)]">
+              {moment.date && <p className="flex items-center gap-2"><FaCalendar className="text-primary" />{moment.date.toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}</p>}
+              {moment.location && <p className="flex items-center gap-2"><FaMapMarkerAlt className="text-primary" />{moment.location}</p>}
+            </div>
+          </div>
+          {moment.description && <div className="mt-8 space-y-3 border-t border-[var(--border)] pt-6 text-sm leading-7 text-[var(--muted)]">{moment.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>}
+        </div>
 
-				{/* Image Section */}
-				<div className="flex-1 border-2 border-secondary rounded-2xl p-3 sm:p-4 md:max-h-[calc(100vh-150px)] flex flex-col">
-					<div className="flex-1 overflow-y-auto no-scrollbar">
-						{moment.photos && moment.photos.length > 0 ? (
-							<div className="grid grid-cols-2 gap-4 auto-rows-max sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-								{moment.photos.map((pic, index) => (
-									<div
-										key={index}
-										className={`
-											${index === 0 ? "sm:col-span-2 lg:col-span-1" : ""}
-											${index === 2 ? "lg:row-span-2" : ""}
-											relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300
-										`}
-									>
-										<Image
-											src={`/gallery/${pic.img}`}
-											alt={`Gallery image ${index + 1}`}
-											width={400}
-											height={300}
-											className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-											style={{
-												minHeight:
-													index === 0
-														? "250px"
-														: "200px",
-												maxHeight:
-													index === 2
-														? "400px"
-														: "300px",
-											}}
-										/>
-									</div>
-								))}
-							</div>
-						) : (
-							<div className="flex items-center justify-center h-full">
-								<p className="text-gray-500">
-									No images available
-								</p>
-							</div>
-						)}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+        <div className="bg-[var(--background)] p-3 sm:p-5">
+          <div className="grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[190px] sm:grid-cols-3">
+            {moment.photos.map((photo, photoIndex) => (
+              <div key={`${photo.img}-${photoIndex}`} className={`group relative overflow-hidden rounded-xl ${photoIndex === 0 ? "col-span-2 row-span-2" : ""}`}>
+                <Image src={`/gallery/${photo.img}`} alt={photo.description ?? `${moment.title} image ${photoIndex + 1}`} fill sizes="(max-width: 640px) 50vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 to-transparent opacity-0 transition group-hover:opacity-100" />
+              </div>
+            ))}
+            {moment.videos?.map((video) => (
+              <div key={video.src} className="relative col-span-2 row-span-2 overflow-hidden rounded-xl bg-slate-950">
+                <video controls preload="metadata" poster={video.poster ? `/gallery/${video.poster}` : undefined} className="h-full w-full object-cover" aria-label={video.title ?? `${moment.title} video`}>
+                  <source src={video.src} />
+                  Your browser does not support video playback.
+                </video>
+                <span className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-slate-950/70 px-3 py-1.5 text-xs font-medium text-white"><FaPlayCircle /> Video</span>
+              </div>
+            ))}
+            {moment.photos.length === 0 && !moment.videos?.length && <div className="col-span-full flex min-h-60 items-center justify-center rounded-xl border border-dashed border-[var(--border)] text-sm text-[var(--muted)]">Add images or videos to this achievement</div>}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
 };
 
-export default template1;
+export default GalleryEntry;
