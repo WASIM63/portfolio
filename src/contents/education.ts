@@ -2,14 +2,6 @@ import { Education } from "@/types";
 
 export const educations: Education[] = [
 	{
-		degree: "Bachelor of Science in Computer Science",
-		institution: "Swami Vivecananda University",
-		start: 2022,
-		end: "present",
-		description:
-			"Graduated with honors. Focused on software engineering and web development.",
-	},
-	{
 		degree: "B.Tech in Computer Science & Engineering",
 		institution: "Swami Vivekananda University",
 		start: 2022,
